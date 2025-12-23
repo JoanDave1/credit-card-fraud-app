@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', 
+filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Credit Card Fraud Detection</h1>
+    <p class="subtitle">AI-powered transaction risk analysis</p>
+
+    <form action="/predict" method="post">
+
+        <label>Distance From Home</label>
+        <input type="number" step="any" name="distance_from_home" 
+required>
+
+        <label>Distance From Last Transaction</label>
+        <input type="number" step="any" 
+name="distance_from_last_transaction" required>
+
+        <label>Ratio to Median Purchase Price</label>
+        <input type="number" step="any" 
+name="ratio_to_median_purchase_price" required>
+
+        <label>Online Order</label>
+        <select name="online_order">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Used Chip</label>
+        <select name="used_chip">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Used PIN</label>
+        <select name="used_pin_number">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Repeat Retailer</label>
+        <select name="repeat_retailer">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <button type="submit">Analyze Transaction</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <h2>{{ prediction }}</h2>
+        <p>Fraud Probability: <strong>{{ probability }}%</strong></p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
+
